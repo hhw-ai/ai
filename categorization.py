@@ -1,28 +1,20 @@
 # coding: UTF-8
-import time
 import os
 import pickle as pkl
 import torch
 import numpy as np
 from train_eval import init_network
 from importlib import import_module
-import argparse
-from utils import build_dataset, build_iterator, build_vocab
+from utils import build_iterator, build_vocab
 
 UNK, PAD = '<UNK>', '<PAD>'
 
-parser = argparse.ArgumentParser(description='Chinese Text Classification')
-parser.add_argument('--embedding', default='pre_trained', type=str, help='random or pre_trained')
-parser.add_argument('--word', default=False, type=bool, help='True for word, False for char')
-args = parser.parse_args()
-
+# todo: 改成一个可以调用的方法，供UI调用，两个输入一个输出
 if __name__ == '__main__':
     dataset = 'THUCNews'  # 数据集
 
     # 搜狗新闻:embedding_SougouNews.npz, 腾讯:embedding_Tencent.npz, 随机初始化:random
     embedding = 'embedding_SougouNews.npz'
-    if args.embedding == 'random':
-        embedding = 'random'
     # todo ： 这里做成输入参数，输入为'TextRCNN'  # TextCNN, TextRNN, FastText, TextRCNN, TextRNN_Att, DPCNN, Transformer里面的一个，可以减少几个
     model_name = 'TextCNN'  # 'TextRCNN'  # TextCNN, TextRNN, FastText, TextRCNN, TextRNN_Att, DPCNN, Transformer
 
